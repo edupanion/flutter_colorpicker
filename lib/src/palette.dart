@@ -811,12 +811,12 @@ class CheckerPainter extends CustomPainter {
 /// Provide label for color information.
 class ColorPickerLabel extends StatefulWidget {
   const ColorPickerLabel(
-    this.hsvColor, {
-    Key? key,
-    this.enableAlpha = true,
-    this.colorLabelTypes = const [ColorLabelType.rgb, ColorLabelType.hsv, ColorLabelType.hsl],
-    this.textStyle,
-  })  : assert(colorLabelTypes.length > 0),
+      this.hsvColor, {
+        Key? key,
+        this.enableAlpha = true,
+        this.colorLabelTypes = const [ColorLabelType.rgb, ColorLabelType.hsv, ColorLabelType.hsl],
+        this.textStyle,
+      })  : assert(colorLabelTypes.length > 0),
         super(key: key);
 
   final HSVColor hsvColor;
@@ -940,13 +940,13 @@ class _ColorPickerLabelState extends State<ColorPickerLabel> {
 /// Provide hex input wiget for 3/6/8 digits.
 class ColorPickerInput extends StatefulWidget {
   const ColorPickerInput(
-    this.color,
-    this.onColorChanged, {
-    Key? key,
-    this.enableAlpha = true,
-    this.embeddedText = false,
-    this.disable = false,
-  }) : super(key: key);
+      this.color,
+      this.onColorChanged, {
+        Key? key,
+        this.enableAlpha = true,
+        this.embeddedText = false,
+        this.disable = false,
+      }) : super(key: key);
 
   final Color color;
   final ValueChanged<Color> onColorChanged;
@@ -1017,13 +1017,13 @@ class _ColorPickerInputState extends State<ColorPickerInput> {
 /// 9 track types for slider picker widget.
 class ColorPickerSlider extends StatelessWidget {
   const ColorPickerSlider(
-    this.trackType,
-    this.hsvColor,
-    this.onColorChanged, {
-    Key? key,
-    this.displayThumbColor = false,
-    this.fullThumbColor = false,
-  }) : super(key: key);
+      this.trackType,
+      this.hsvColor,
+      this.onColorChanged, {
+        Key? key,
+        this.displayThumbColor = false,
+        this.fullThumbColor = false,
+      }) : super(key: key);
 
   final TrackType trackType;
   final HSVColor hsvColor;
@@ -1036,8 +1036,8 @@ class ColorPickerSlider extends StatelessWidget {
     double progress = localDx.clamp(0.0, box.maxWidth - 30.0) / (box.maxWidth - 30.0);
     switch (trackType) {
       case TrackType.hue:
-        // 360 is the same as zero
-        // if set to 360, sliding to end goes to zero
+      // 360 is the same as zero
+      // if set to 360, sliding to end goes to zero
         onColorChanged(hsvColor.withHue(progress * 359));
         break;
       case TrackType.saturation:
@@ -1120,9 +1120,9 @@ class ColorPickerSlider extends StatelessWidget {
               borderRadius: const BorderRadius.all(Radius.circular(50.0)),
               child: CustomPaint(
                   painter: TrackPainter(
-                trackType,
-                hsvColor,
-              )),
+                    trackType,
+                    hsvColor,
+                  )),
             ),
           ),
           LayoutId(
@@ -1144,9 +1144,9 @@ class ColorPickerSlider extends StatelessWidget {
                 RenderBox? getBox = context.findRenderObject() as RenderBox?;
                 return GestureDetector(
                   onPanDown: (DragDownDetails details) =>
-                      getBox != null ? slideEvent(getBox, box, details.globalPosition) : null,
+                  getBox != null ? slideEvent(getBox, box, details.globalPosition) : null,
                   onPanUpdate: (DragUpdateDetails details) =>
-                      getBox != null ? slideEvent(getBox, box, details.globalPosition) : null,
+                  getBox != null ? slideEvent(getBox, box, details.globalPosition) : null,
                 );
               },
             ),
@@ -1160,11 +1160,11 @@ class ColorPickerSlider extends StatelessWidget {
 /// Simple round color indicator.
 class ColorIndicator extends StatelessWidget {
   const ColorIndicator(
-    this.hsvColor, {
-    Key? key,
-    this.width = 50.0,
-    this.height = 50.0,
-  }) : super(key: key);
+      this.hsvColor, {
+        Key? key,
+        this.width = 16.0,
+        this.height = 16.0,
+      }) : super(key: key);
 
   final HSVColor hsvColor;
   final double width;
@@ -1176,13 +1176,16 @@ class ColorIndicator extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(1000.0)),
-        border: Border.all(color: const Color(0xffdddddd)),
+        color: hsvColor.toColor(),
+        borderRadius: BorderRadius.circular(4),
       ),
-      child: ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(1000.0)),
-        child: CustomPaint(painter: IndicatorPainter(hsvColor.toColor())),
-      ),
+      // decoration: BoxDecoration(
+      //   borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+      // ),
+      // child: ClipRRect(
+      //   borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+      //   child: CustomPaint(painter: IndicatorPainter(hsvColor.toColor())),
+      // ),
     );
   }
 }
@@ -1190,11 +1193,11 @@ class ColorIndicator extends StatelessWidget {
 /// Provide Rectangle & Circle 2 categories, 10 variations of palette widget.
 class ColorPickerArea extends StatelessWidget {
   const ColorPickerArea(
-    this.hsvColor,
-    this.onColorChanged,
-    this.paletteType, {
-    Key? key,
-  }) : super(key: key);
+      this.hsvColor,
+      this.onColorChanged,
+      this.paletteType, {
+        Key? key,
+      }) : super(key: key);
 
   final HSVColor hsvColor;
   final ValueChanged<HSVColor> onColorChanged;
@@ -1281,8 +1284,8 @@ class ColorPickerArea extends StatelessWidget {
         return RawGestureDetector(
           gestures: {
             _AlwaysWinPanGestureRecognizer: GestureRecognizerFactoryWithHandlers<_AlwaysWinPanGestureRecognizer>(
-              () => _AlwaysWinPanGestureRecognizer(),
-              (_AlwaysWinPanGestureRecognizer instance) {
+                  () => _AlwaysWinPanGestureRecognizer(),
+                  (_AlwaysWinPanGestureRecognizer instance) {
                 instance
                   ..onDown = ((details) => _handleGesture(details.globalPosition, context, height, width))
                   ..onUpdate = ((details) => _handleGesture(details.globalPosition, context, height, width));
@@ -1328,12 +1331,12 @@ class ColorPickerArea extends StatelessWidget {
 /// Provide Hue Ring with HSV Rectangle of palette widget.
 class ColorPickerHueRing extends StatelessWidget {
   const ColorPickerHueRing(
-    this.hsvColor,
-    this.onColorChanged, {
-    Key? key,
-    this.displayThumbColor = true,
-    this.strokeWidth = 5.0,
-  }) : super(key: key);
+      this.hsvColor,
+      this.onColorChanged, {
+        Key? key,
+        this.displayThumbColor = true,
+        this.strokeWidth = 5.0,
+      }) : super(key: key);
 
   final HSVColor hsvColor;
   final ValueChanged<HSVColor> onColorChanged;
@@ -1365,8 +1368,8 @@ class ColorPickerHueRing extends StatelessWidget {
         return RawGestureDetector(
           gestures: {
             _AlwaysWinPanGestureRecognizer: GestureRecognizerFactoryWithHandlers<_AlwaysWinPanGestureRecognizer>(
-              () => _AlwaysWinPanGestureRecognizer(),
-              (_AlwaysWinPanGestureRecognizer instance) {
+                  () => _AlwaysWinPanGestureRecognizer(),
+                  (_AlwaysWinPanGestureRecognizer instance) {
                 instance
                   ..onDown = ((details) => _handleGesture(details.globalPosition, context, height, width))
                   ..onUpdate = ((details) => _handleGesture(details.globalPosition, context, height, width));

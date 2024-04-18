@@ -1160,13 +1160,13 @@ class ColorPickerSlider extends StatelessWidget {
 /// Simple round color indicator.
 class ColorIndicator extends StatelessWidget {
   const ColorIndicator(
-      this.hsvColor, {
+      this.color, {
         Key? key,
         this.width = 16.0,
         this.height = 16.0,
       }) : super(key: key);
 
-  final HSVColor hsvColor;
+  final Color color;
   final double width;
   final double height;
 
@@ -1176,7 +1176,7 @@ class ColorIndicator extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: hsvColor.toColor(),
+        color: color,
         borderRadius: BorderRadius.circular(4),
       ),
       // decoration: BoxDecoration(
